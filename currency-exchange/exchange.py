@@ -156,7 +156,7 @@ def exchangeable_value(budget, exchange_rate, spread, denomination):
     determining the exchange rate plus the spread.
     """
 
-    exchange_rate_with_fee = exchange_rate * (spread / 100)
+    exchange_rate_with_fee = exchange_rate * (1 + (spread / 100))
     budget_to_new_currency = budget / exchange_rate_with_fee
     total_units = budget_to_new_currency // denomination
     return int(total_units * denomination)
