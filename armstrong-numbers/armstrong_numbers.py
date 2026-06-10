@@ -1,8 +1,8 @@
 def is_armstrong_number(number):
-    sum = 0
-    digits = [int(d) for d in str(number)]
+    sum_of_digits = 0
+    digits = [int(digit) for digit in str(number)]
     exponent = len(digits)
     for digit in digits:
-        sum += digit ** exponent
+        sum_of_digits += digit ** exponent
 
-    return sum == number
+    return sum_of_digits == number
