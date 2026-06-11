@@ -1,27 +1,33 @@
 def translate(text):
-    if len(text) > 1:
-        new_word = ""
+    text_list = text.rsplit(" ")
+    final_translation = ""
+    for word in text_list:
+        final_translation += " " + translate_word(word)
+    
+    return final_translation.lstrip()
 
-        if is_vowel(text[0]) or is_xr_or_yt(text[0] + text[1]):
-            return text + "ay"
+def translate_word(word):
+    if len(word) > 1:
+        if is_vowel(word[0]) or is_xr_or_yt(word[0] + word[1]):
+            return word + "ay"
         
-        qu_index = index_of_qu(text)
+        qu_index = index_of_qu(word)
         if qu_index > 0:
-            return text[qu_index + 1:] + text[:qu_index + 1] + "ay"
+            return word[qu_index + 1:] + word[:qu_index + 1] + "ay"
         
-        y_index = index_of_y(text)
+        y_index = index_of_y(word)
         if y_index > 0:
-            return text[y_index:] + text[:y_index] + "ay"
+            return word[y_index:] + word[:y_index] + "ay"
         
-        return text[index_of_vowel(text):] + "ay"
+        return word[index_of_vowel(word):] + word[:index_of_vowel(word)] + "ay"
 
-    return text
+    return word
 
 def is_vowel(letter):
-    return letter == "a" or letter == "e" or letter == "i" or letter == "o" or letter == "u"
+    return letter in {"a", "e", "i", "o", "u"}
 
 def is_xr_or_yt(letters):
-    return letters == "xr" or letters == "yt"
+    return letters in {"xr", "yt"}
 
 def index_of_vowel(text):
     for index, letter in enumerate(text):
